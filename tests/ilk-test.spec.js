@@ -26,6 +26,20 @@ test('Link Sayfasına git', async({ page }) => {
     await element_rapor_link.click();
     });
     
+test('Sertifikalar sayfasına git', async({ page })  => {
+    await page.goto('https://basicwebsite.rfnnet.com');
+    await expect(page).toHaveTitle(/Edgecut/);    
+    
+    //Hakkında sayfasını aç
+    const element_hakkinda = page.locator('//*[@id="navbarSupportedContent"]/div[1]/ul/li[2]/a');
+    await element_hakkinda.click();
+
+    //Sertifikalar butonuna tıkla
+    await page.getByRole('link', {name: 'Sertifikalar'}).click();
+
+    //Sayfada Linux kelimesi varmı?
+    await expect(page.locator('text=Linux')).toBeVisible();
+});
 
 test('Ana sayfa başlığını kontrol ediliyor', async({ page }) => {
     await page.goto('https://basicwebsite.rfnnet.com');
